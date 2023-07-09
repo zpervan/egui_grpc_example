@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package rpc;
+
+// Refers to `server/proto` where all proto and proto_grpc files are generated
+option go_package = "./proto";
+
+service Test
+{
+    rpc TestConnection (DummyRequest) returns (DummyResponse) {}
+}
+
+// Request message mostly used for testing and prototyping
+message DummyRequest
+{
+    string dummy_data = 1;
+}
+
+// Response message mostly used for testing
+message DummyResponse
+{
+    string dummy_data = 1;
+}

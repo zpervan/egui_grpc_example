@@ -1,0 +1,38 @@
+name: Ubuntu Server
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-go@v3
+        with:
+          go-version: "1.20"
+
+      - name: Install Go protobuf dependencies
+        run: |
+          cd server
+          go mod tidy
+          go install google.golang.org/protobuf/cmd/protoc-gen-go
+          go get google.golang.org/grpc/cmd/protoc-gen-go-grpc
+          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc
+
+      - name: Build server
+        run: |
+          export PATH="$PATH:$(pwd)/tools"
+          cd proto_messages && pwd
+          protoc --go_out=../server --go-grpc_out=../server *.proto
+          cd .. && cd server && pwd
+          go build -o server.out .

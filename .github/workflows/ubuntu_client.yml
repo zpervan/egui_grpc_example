@@ -1,0 +1,33 @@
+name: Ubuntu Client
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    types:
+      - opened
+      - reopened
+      - synchronize
+
+env:
+  CARGO_TERM_COLOR: always
+  RUST_BACKTRACE: 1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install client dependencies
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y libxcb-render0-dev libxcb-shape0-dev libxcb-xfixes0-dev libxkbcommon-dev libssl-dev
+      
+      - name: Build client
+        run: |
+          export PATH="$PATH:$(pwd)/tools" 
+          cd client
+          cargo build --release

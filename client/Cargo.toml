@@ -1,0 +1,19 @@
+[package]
+name = "test"
+version = "0.1.0"
+edition = "2021"
+authors = ["Zvonimir Pervan <z.pervan65@gmail.com>"]
+
+[dependencies]
+egui = "0.22"
+eframe = { version = "0.22", default-features = false, features = [
+    "accesskit",
+    "default_fonts",
+    "glow",
+] }
+tonic = "0.9"
+prost = "0.11"
+tokio = { version = "1.29", features = ["rt-multi-thread"] }
+
+[build-dependencies]
+tonic-build = "0.9"

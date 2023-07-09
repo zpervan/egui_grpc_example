@@ -1,0 +1,7 @@
+# Folders
+*/target
+
+#Files
+*.log
+*.lock
+*.sum
