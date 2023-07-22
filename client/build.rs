@@ -1,4 +1,6 @@
-fn main() {
+use std::io;
+
+fn main() -> io::Result<()> {
     let parent_dir = std::env::current_dir()
         .unwrap()
         .parent()
@@ -11,6 +13,7 @@ fn main() {
     tonic_build::configure()
         .out_dir("src/proto")
         .build_server(false)
+        .build_client(true)
+        .build_transport(false)
         .compile(&[proto_file_path], &[proto_path])
-        .expect("Couldn't generate protobuf and gRPC files")
 }

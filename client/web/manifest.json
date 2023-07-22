@@ -1,0 +1,11 @@
+{
+    "name": "eGUI-gRPC example",
+    "short_name": "egui-grpc",
+    "icons": [],
+    "lang": "en-US",
+    "id": "/index.html",
+    "start_url": "./index.html",
+    "display": "standalone",
+    "background_color": "white",
+    "theme_color": "white"
+  }
